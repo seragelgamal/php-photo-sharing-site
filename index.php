@@ -12,7 +12,7 @@ $photos = $stmt->fetchAll();
 <hr>
 <h2>Photos</h2>
 <?php if (sizeof($photos) > 0) { ?>
-  <h3>Click on an individual photo to view its caption, user-written comments, and more info</h3>
+  <h3>Click on an individual photo for more information</h3>
   <?php foreach ($photos as $photo) { ?>
     <a href="photoInfo.php?photoId=<?= $photo->id ?>" style="text-decoration: none; color: none">
       <div style="display: inline-block; margin: 5px">
@@ -23,5 +23,7 @@ $photos = $stmt->fetchAll();
 } else { ?>
   <h3>No one has uploaded photos yet. You can be the first by <a href="uploadPhoto.php">uploading your own photo</a></h3>
 <?php }
+
+require('misc/footer.php');
 
 ?>
