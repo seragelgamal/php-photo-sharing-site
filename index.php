@@ -1,6 +1,10 @@
 <?php
 
+session_start();
+
 require('misc/header.php');
+
+var_dump($_SESSION);
 
 // get all photos from database
 $stmt = $pdo->query('SELECT * FROM photos');
