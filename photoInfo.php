@@ -4,19 +4,6 @@ session_start();
 
 require('misc/header.php');
 
-// FUNCTIONS
-// return an array of all the errors found for an admin-entered username
-function usernameErrorArray(string $usernameVariable) {
-  $errorArray = [];
-  if (!pushErrorIfBlank($usernameVariable, $errorArray, 'Username')) {
-    $usernameVariable = trim($usernameVariable);
-    if (str_contains($usernameVariable, ' ')) {
-      array_push($errorArray, "Username can't contain spaces");
-    }
-  }
-  return $errorArray;
-}
-
 $nameErrors = $commentErrors = [];
 
 if (isset($_GET['photoId']) && $_GET['photoId'] != '') {
@@ -40,10 +27,14 @@ if (isset($_GET['photoId']) && $_GET['photoId'] != '') {
 }
 
 // form action
-// if (isset($_POST['submit'])) {
-//   $username = $_POST['name'];
-//   $nameErrors = usernameErrorArray()
-// }
+if (isset($_POST['submit'])) {
+  $comment = $_POST['comment'];
+  $comment = trim($comment);
+
+  // if comment length is more than 0 after trimming it (i.e it had at least one letter), post it
+  if (strlen($comment) > 0) {
+  }
+}
 
 ?>
 
@@ -59,8 +50,11 @@ if (isset($_GET['photoId']) && $_GET['photoId'] != '') {
 <h2>Comments</h2>
 <h3>Add a comment:</h3>
 <form action="photoInfo.php">
-  <?= echoErrors($nameErrors) ?>
-  <p>Name: <input type="text" name="name" placeholder="Type name here..." maxlength="20"></p>
+  <?php $commenter = $_SESSION['username'] ?? 'Guest';
+  
+  ?>
+  <p>Posting as <b><?= $commenter ?></b></p>
+  <input type="hidden" name="commenterId" value="">
   <?= echoErrors($commentErrors) ?>
   <textarea name="comment" placeholder="Type a comment here..." cols="70" rows="10" maxlength="500" style="font-family: 'Times New Roman', Times, serif;"></textarea>
   <p><input type="submit" name="submit" value="Post"></p>

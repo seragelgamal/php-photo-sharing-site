@@ -42,7 +42,7 @@ if (isset($_POST['logIn'])) {
 
     // attempt login
     $stmt = $pdo->prepare("SELECT 1 FROM user_credentials WHERE username = :username && pwd = :pwd");
-    $stmt->execute(['username' => $_POST['username'], 'pwd' => $_POST['pwd']]);
+    $stmt->execute(['username' => $username, 'pwd' => $pwd]);
 
     if ($stmt->rowCount() == 0) {
       // if login fails, notify the user
@@ -52,11 +52,13 @@ if (isset($_POST['logIn'])) {
       $_SESSION['username'] = $username;
       $_SESSION['pwd'] = $pwd;
       header("Location: {$_POST['redirect']}");
+      exit;
     }
   }
 }
 
 var_dump($_GET);
+var_dump($_POST);
 
 ?>
 

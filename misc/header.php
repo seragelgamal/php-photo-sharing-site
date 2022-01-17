@@ -19,6 +19,12 @@ function pushErrorIfBlank(mixed $input, array &$errorArray, string $fieldName) {
 $pdo = new PDO('mysql:host=localhost;dbname=photo_sharing', 'photosharing', 'photosharing');
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
+// form action
+if (isset($_POST['submit'])) {
+  session_unset();
+  session_destroy();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +43,12 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
   <?php if (!isset($_GET['redirect'])) {
     // if user is logged in
     if (isset($_SESSION['username']) && isset($_SESSION['pwd'])) { ?>
-      <p style="text-align: right;">Logged in as <b><?= $_SESSION['username'] ?></b></p>
+      <div style="text-align: center;">
+        <p style="text-align: center;">Logged in as <b><?= $_SESSION['username'] ?></b></p>
+        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+          <p><input type="submit" name="submit" value="Log out"></p>
+        </form>
+      </div>
     <?php } else { ?>
       <!-- if user isnt logged in -->
       <p style="text-align: center;"><a href="login.php?redirect=<?= $_SERVER['PHP_SELF'] ?>"><button>Log in</button></a>
