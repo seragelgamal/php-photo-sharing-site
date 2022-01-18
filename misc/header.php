@@ -19,6 +19,11 @@ function pushErrorIfBlank(mixed $input, array &$errorArray, string $fieldName) {
 $pdo = new PDO('mysql:host=localhost;dbname=photo_sharing', 'photosharing', 'photosharing');
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
+// form action
+// if (isset($_POST['logOut']) && $_POST['logOut'] == 'Log out') {
+
+// }
+
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +41,19 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
   <!-- run login/signup button code only if the page doesnt have a redirect set (aka if the user is on any page other than login/signup pages) -->
   <?php if (!isset($_GET['redirect'])) {
     // if user is logged in
-    if (isset($_SESSION['username']) && isset($_SESSION['pwd'])) { ?>
-      <p style="text-align: right;">Logged in as <b><?= $_SESSION['username'] ?></b></p>
+    if (isset($_SESSION['username'])) { ?>
+      <div style="text-align: center;">
+        <p style="text-align: center;">Logged in as <b><?= $_SESSION['username'] ?></b></p>
+        <!-- put the upload photo button if the user isnt already on the upload page -->
+        <?php if ($_SERVER['PHP_SELF'] != '/php-photo-sharing-site/uploadPhoto.php') { ?>
+          <p><a href="uploadPhoto.php"><button>Upload Photo</button></a></p>
+        <?php } ?>
+        <p>
+        <form action="misc/logOut.php" method="post">
+          <input type="submit" name="logOut" value="Log out">
+        </form>
+        </p>
+      </div>
     <?php } else { ?>
       <!-- if user isnt logged in -->
       <p style="text-align: center;"><a href="login.php?redirect=<?= $_SERVER['PHP_SELF'] ?>"><button>Log in</button></a>

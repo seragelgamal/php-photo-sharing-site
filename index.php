@@ -12,7 +12,6 @@ $photos = $stmt->fetchAll();
 
 ?>
 
-<a href="uploadPhoto.php"><button>Upload Photo</button></a>
 <hr>
 <h2>Photos</h2>
 <?php if (sizeof($photos) > 0) { ?>
