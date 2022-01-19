@@ -12,7 +12,6 @@ $photos = $stmt->fetchAll();
 
 ?>
 
-<hr>
 <h2>Photos</h2>
 <?php if (sizeof($photos) > 0) { ?>
   <h3>Click on an individual photo for more information</h3>

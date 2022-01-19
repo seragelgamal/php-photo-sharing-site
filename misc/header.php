@@ -15,6 +15,15 @@ function pushErrorIfBlank(mixed $input, array &$errorArray, string $fieldName) {
   }
   return false;
 }
+// returns an array of errors for a user-entered photo caption or comment
+function captionCommentErrorArray(string &$textVariable, string $fieldName) {
+  $errorArray = [];
+  $textVariable = trim($textVariable);
+  if (strlen($textVariable) == 0) {
+    array_push($errorArray, "$fieldName field is empty");
+  }
+  return $errorArray;
+}
 
 $pdo = new PDO('mysql:host=localhost;dbname=photo_sharing', 'photosharing', 'photosharing');
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);

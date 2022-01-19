@@ -18,10 +18,6 @@ if (isset($_GET['photoId']) && $_GET['photoId'] !== '') {
   // get the poster's username
   $stmt = $pdo->query("SELECT * FROM user_credentials WHERE id = {$photo->user_id}");
   $poster = $stmt->fetchColumn(1);
-
-  // var_dump($photo);
-  // var_dump($comments);
-  // var_dump($poster);
 } else {
   header('Location: index.php');
 }
@@ -29,19 +25,15 @@ if (isset($_GET['photoId']) && $_GET['photoId'] !== '') {
 // form action
 if (isset($_POST['post']) && $_POST['post'] == 'Post') {
   $comment = $_POST['comment'];
-  $comment = trim($comment);
+  $commentErrors = captionCommentErrorArray($comment, 'Comment');
 
-  // if comment length is more than 0 after trimming it (i.e it had at least one letter), post it and refresh the page
-  if (strlen($comment) > 0) {
+  if (sizeof($commentErrors) == 0) {
     $stmt = $pdo->prepare("INSERT INTO comments (photo_id, user_id, text) VALUES (:photoId, :userId, :text)");
     $stmt->execute(['photoId' => $_GET['photoId'], 'userId' => $_POST['commenterId'], 'text' => $_POST['comment']]);
-
     header('Refresh: 0');
+    exit;
   }
 }
-
-var_dump($_GET);
-var_dump($_POST);
 
 ?>
 
