@@ -38,7 +38,7 @@ if (isset($_POST['post']) && $_POST['post'] == 'Post') {
 ?>
 
 <h2>Photo Info</h2>
-<img src="data:image/jpeg;base64, <?= base64_encode($photo->blob) ?>" width="1000px" style="display: block; margin: auto;">
+<img src="data:image/jpeg;base64, <?= base64_encode($photo->photo_blob) ?>" width="1000px" style="display: block; margin: auto;">
 <?php if ($photo->caption != '') { ?>
   <p style="text-align: center;"><?= $photo->caption ?></p>
 <?php } ?>

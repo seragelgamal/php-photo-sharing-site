@@ -18,7 +18,7 @@ $photos = $stmt->fetchAll();
   <?php foreach ($photos as $photo) { ?>
     <a href="photoInfo.php?photoId=<?= $photo->id ?>" style="text-decoration: none; color: none">
       <div style="display: inline-block; margin: 5px">
-        <img src="data:image/jpeg;base64, <?= base64_encode($photo->blob) ?>" width="225px">
+        <img src="data:image/jpeg;base64, <?= base64_encode($photo->photo_blob) ?>" width="225px">
       </div>
     </a>
   <?php }

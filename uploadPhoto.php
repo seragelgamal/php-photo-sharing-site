@@ -21,10 +21,12 @@ if (isset($_POST['upload']) && $_POST['upload'] == 'Upload') {
   $captionErrors = captionCommentErrorArray($caption, 'Caption');
 
   if (sizeof($fileErrors) == 0 && sizeof($captionErrors) == 0) {
-    $blob = file_get_contents($_FILES['file']['tmp_name']);
+    $photoBlob = file_get_contents($_FILES['file']['tmp_name']);
     // upload image
-    $stmt = $pdo->prepare("INSERT INTO photos (blob, caption, user_id) VALUES (:blob, :caption, :userId)");
-    $stmt->execute(['blob' => $blob, 'caption' => $caption, 'userId' => $_SESSION['userId']]);
+    $stmt = $pdo->prepare("INSERT INTO photos (photo_blob, caption, user_id) VALUES (:photoBlob, :caption, :userId)");
+    $stmt->execute(['photoBlob' => $photoBlob, 'caption' => $caption, 'userId' => $_SESSION['userId']]);
+    header('Location: index.php');
+    exit;
   }
 }
 
