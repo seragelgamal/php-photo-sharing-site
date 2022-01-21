@@ -58,9 +58,6 @@ if (isset($_POST['logIn'])) {
   }
 }
 
-var_dump($_GET);
-var_dump($_POST);
-
 ?>
 
 <h2>Login</h2>

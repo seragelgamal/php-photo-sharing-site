@@ -28,11 +28,6 @@ function captionCommentErrorArray(string &$textVariable, string $fieldName) {
 $pdo = new PDO('mysql:host=localhost;dbname=photo_sharing', 'photosharing', 'photosharing');
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
-// form action
-// if (isset($_POST['logOut']) && $_POST['logOut'] == 'Log out') {
-
-// }
-
 ?>
 
 <!DOCTYPE html>

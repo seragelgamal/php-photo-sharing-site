@@ -67,9 +67,6 @@ if (isset($_POST['createAccount'])) {
   }
 }
 
-var_dump($_GET);
-var_dump($_POST);
-
 ?>
 
 <h2>Signup</h2>
@@ -84,3 +81,5 @@ var_dump($_POST);
   <p><input type="submit" name="createAccount" value="Create account"></p>
   <input type="hidden" name="redirect" value="<?= $_GET['redirect'] ?>">
 </form>
+
+<?php require('misc/footer.php'); ?>

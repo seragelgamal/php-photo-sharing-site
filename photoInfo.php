@@ -40,7 +40,7 @@ if (isset($_POST['post']) && $_POST['post'] == 'Post') {
 <h2>Photo Info</h2>
 <img src="data:image/jpeg;base64, <?= base64_encode($photo->photo_blob) ?>" width="1000px" style="display: block; margin: auto;">
 <?php if ($photo->caption != '') { ?>
-  <p style="text-align: center;"><?= $photo->caption ?></p>
+  <h3 style="text-align: center;"><?= $photo->caption ?></h3>
 <?php } ?>
 <p style="text-align: center; text-decoration: underline;">Posted by: <b><?= $poster ?></b></p>
 <p style="text-align: center; text-decoration: underline;">Posted on: <b><?= $photo->uploaded_at ?></b></p>
@@ -71,6 +71,4 @@ if (isset($_POST['post']) && $_POST['post'] == 'Post') {
   <h3 style="text-align: center;">No comments have been posted yet. Be the first commenter by posting a comment above</h3>
 <?php }
 
-require('misc/footer.php');
-
-?>
+require('misc/footer.php'); ?>
